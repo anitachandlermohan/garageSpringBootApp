@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.mohan.anita.garageApp.exception.ResourceNotFoundException;
+import com.qa.mohan.anita.garageApp.model.VehicleType;
 import com.qa.mohan.anita.garageApp.model.garageAppVehicle;
 import com.qa.mohan.anita.garageApp.repository.VehicleRepository;
 
@@ -23,7 +24,7 @@ import com.qa.mohan.anita.garageApp.repository.VehicleRepository;
 @RequestMapping("/api")
 public class GarageAppController {
 	@Autowired
-	
+	 
 	VehicleRepository myRepository;
 	
 	//create vehicle
@@ -42,6 +43,11 @@ public class GarageAppController {
 	@GetMapping("/vehicle")
 	public List<garageAppVehicle> getAllVehicles(){
 		return myRepository.findAll();
+	}
+	// find vehicle by type
+	@GetMapping("vehicle/type/{type}")
+	public List<garageAppVehicle> findVehicleByType(@PathVariable(value = "type")VehicleType type){
+		return myRepository.findByType(type);
 	}
 	
 //	update a vehicle with enums
@@ -69,6 +75,8 @@ public class GarageAppController {
 		garageAppVehicle updateData = myRepository.save(gAV);
 		return updateData;
 	}
+	
+	
 	@DeleteMapping("/vehicle/{id}")
 	public ResponseEntity<?> deleteVehicle(@PathVariable(value = "id")Long vehicleID){
 		garageAppVehicle gAV = myRepository.findById(vehicleID).orElseThrow(()-> new ResourceNotFoundException("vehicle","id",vehicleID));
@@ -76,4 +84,6 @@ public class GarageAppController {
 		myRepository.delete(gAV);
 		return ResponseEntity.ok().build();
 	}
+	@DeleteMapping("/vehicle/type/{type}")
+	public
 }

@@ -52,7 +52,20 @@ public class garageAppVehicle implements Serializable {
 	
 	
 	
-	public Long getId() {
+	
+	public garageAppVehicle( String vehicletype, String size, String colour) {
+
+		this.type = VehicleType.valueOf(vehicletype.toUpperCase());
+		this.size = size;
+		this.colour = colour;
+		
+	}
+	
+	public garageAppVehicle() {
+		 
+	}
+	
+	public Long getId() { 
 		return id;
 	}
 	
@@ -76,7 +89,7 @@ public class garageAppVehicle implements Serializable {
 	public void setSize(String size) {
 		this.size = size;
 	}
-	
+	 
 	public String getColour() {
 		return colour;
 	}
