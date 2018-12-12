@@ -44,7 +44,7 @@ public class GarageAppController {
 		return myRepository.findAll();
 	}
 	
-	//update a vehicle
+//	update a vehicle with enums
 //	@PutMapping("/vehicle/{id}")
 //	public garageAppVehicle updateVehicle(@PathVariable(value = "id")Long vehicleID,
 //			@Valid @RequestBody garageAppVehicle vehicleDetails) {

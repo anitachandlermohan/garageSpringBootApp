@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +31,9 @@ public class garageAppVehicle implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
-	private String type;
+	
+	@Enumerated(EnumType.STRING)
+	private VehicleType type;
 	
 	@NotBlank
 	private String size;
@@ -58,11 +61,12 @@ public class garageAppVehicle implements Serializable {
 	}
 	
 	public String getType() {
-		return type;
+		return type.toString();
 	}
 	
 	public void setType(String type) {
-		this.type =type;
+		VehicleType vehicletype = VehicleType.valueOf(type.toUpperCase());
+		this.type = vehicletype;
 	}
 	
 	public String getSize() {
@@ -76,6 +80,7 @@ public class garageAppVehicle implements Serializable {
 	public String getColour() {
 		return colour;
 	}
+	
 	
 	public void setColour(String colour) {
 		this.colour = colour;
