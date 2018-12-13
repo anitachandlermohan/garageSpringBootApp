@@ -2,11 +2,16 @@ package com.qa.mohan.anita.garageApp.repository;
 
 import java.util.List;
 
+
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+
+import com.qa.mohan.anita.garageApp.model.GarageAppVehicle;
 import com.qa.mohan.anita.garageApp.model.VehicleType;
-import com.qa.mohan.anita.garageApp.model.garageAppVehicle;
 
-public interface VehicleRepository extends JpaRepository<garageAppVehicle,Long> {
-	List<garageAppVehicle> findByType(VehicleType type);
+@Repository
+public interface VehicleRepository extends JpaRepository<GarageAppVehicle,Long> {
+	List<GarageAppVehicle> findByType(VehicleType type);
 }

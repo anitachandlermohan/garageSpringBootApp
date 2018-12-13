@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.mohan.anita.garageApp.exception.ResourceNotFoundException;
 import com.qa.mohan.anita.garageApp.model.VehicleType;
-import com.qa.mohan.anita.garageApp.model.garageAppVehicle;
+import com.qa.mohan.anita.garageApp.model.GarageAppVehicle;
 import com.qa.mohan.anita.garageApp.repository.VehicleRepository;
 
 @RestController
@@ -29,61 +29,48 @@ public class GarageAppController {
 	
 	//create vehicle
 	@PostMapping("/GarageAppVehicle")
-	public garageAppVehicle createVehicle(@Valid @RequestBody garageAppVehicle gAV) {
+	public GarageAppVehicle createVehicle(@Valid @RequestBody GarageAppVehicle gAV) {
 		return myRepository.save(gAV);
 	}
 	
 	//get single vehicle
 	@GetMapping("vehicle/{id}")
-	public garageAppVehicle getVehiclebyID(@PathVariable(value = "id")Long vehicleID) {
+	public GarageAppVehicle getVehiclebyID(@PathVariable(value = "id")Long vehicleID) {
 		return myRepository.findById(vehicleID).orElseThrow(()-> new ResourceNotFoundException("garageAppVehicle","id",vehicleID));
 		
 	}
 	//get all vehicles
 	@GetMapping("/vehicle")
-	public List<garageAppVehicle> getAllVehicles(){
+	public List<GarageAppVehicle> getAllVehicles(){
 		return myRepository.findAll();
 	}
 	// find vehicle by type
 	@GetMapping("vehicle/type/{type}")
-	public List<garageAppVehicle> findVehicleByType(@PathVariable(value = "type")VehicleType type){
+	public List<GarageAppVehicle> findVehicleByType(@PathVariable(value = "type")VehicleType type){
 		return myRepository.findByType(type);
 	}
 	
-//	update a vehicle with enums
-//	@PutMapping("/vehicle/{id}")
-//	public garageAppVehicle updateVehicle(@PathVariable(value = "id")Long vehicleID,
-//			@Valid @RequestBody garageAppVehicle vehicleDetails) {
-//		garageAppVehicle gAV = myRepository.findById(vehicleID).orElseThrow(() -> new ResourceNotFoundException("vehicle","id",vehicleID));
-//		gAV.setType(VehicleType.valueOf(vehicleDetails.getType().toUpperCase()));
-//		gAV.setSize(VehicleSize.valueOf(vehicleDetails.getSize().toUpperCase()));
-//		gAV.setColour(vehicleDetails.getColour());
-//		
-//		garageAppVehicle updateData = myRepository.save(gAV);
-//		return updateData;
-		
-//	}
-	
+
 	@PutMapping("/vehicle/{id}")
-	public garageAppVehicle updateVehicle(@PathVariable(value = "id")Long vehicleID,
-	@Valid @RequestBody garageAppVehicle vehicleDetails){
-		garageAppVehicle gAV = myRepository.findById(vehicleID).orElseThrow(()-> new ResourceNotFoundException("vehicle","id",vehicleID));
+	public GarageAppVehicle updateVehicle(@PathVariable(value = "id")Long vehicleID,
+	@Valid @RequestBody GarageAppVehicle vehicleDetails){
+		GarageAppVehicle gAV = myRepository.findById(vehicleID).orElseThrow(()-> new ResourceNotFoundException("vehicle","id",vehicleID));
 		gAV.setType(vehicleDetails.getType());
 		gAV.setSize(vehicleDetails.getSize());
 		gAV.setColour(vehicleDetails.getColour());
 		
-		garageAppVehicle updateData = myRepository.save(gAV);
+		GarageAppVehicle updateData = myRepository.save(gAV);
 		return updateData;
 	}
 	
 	
 	@DeleteMapping("/vehicle/{id}")
 	public ResponseEntity<?> deleteVehicle(@PathVariable(value = "id")Long vehicleID){
-		garageAppVehicle gAV = myRepository.findById(vehicleID).orElseThrow(()-> new ResourceNotFoundException("vehicle","id",vehicleID));
+		GarageAppVehicle gAV = myRepository.findById(vehicleID).orElseThrow(()-> new ResourceNotFoundException("vehicle","id",vehicleID));
 		
 		myRepository.delete(gAV);
 		return ResponseEntity.ok().build();
 	}
-	@DeleteMapping("/vehicle/type/{type}")
-	public
+//	@DeleteMapping("/vehicle/type/{type}")
+//	public
 }

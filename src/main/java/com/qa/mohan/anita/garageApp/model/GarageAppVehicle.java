@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "vehicle")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"creationDate", "lastModified"}, allowGetters = true)
-public class garageAppVehicle implements Serializable {
+public class GarageAppVehicle implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -53,7 +53,7 @@ public class garageAppVehicle implements Serializable {
 	
 	
 	
-	public garageAppVehicle( String vehicletype, String size, String colour) {
+	public GarageAppVehicle( String vehicletype, String size, String colour) {
 
 		this.type = VehicleType.valueOf(vehicletype.toUpperCase());
 		this.size = size;
@@ -61,7 +61,7 @@ public class garageAppVehicle implements Serializable {
 		
 	}
 	
-	public garageAppVehicle() {
+	public GarageAppVehicle() {
 		 
 	}
 	

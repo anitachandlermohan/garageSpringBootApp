@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.qa.mohan.anita.garageApp.GarageAppApplication;
 import com.qa.mohan.anita.garageApp.model.VehicleType;
-import com.qa.mohan.anita.garageApp.model.garageAppVehicle;
+import com.qa.mohan.anita.garageApp.model.GarageAppVehicle;
 import com.qa.mohan.anita.garageApp.repository.VehicleRepository;
 
 @RunWith(SpringRunner.class)
@@ -23,15 +23,16 @@ import com.qa.mohan.anita.garageApp.repository.VehicleRepository;
 @ContextConfiguration(classes = {GarageAppApplication.class})
 @DataJpaTest
 public class TestRepository { 
+
 	@Autowired
 	private TestEntityManager entityManager;
 	
-	@Autowired
+	@Autowired 
 	private VehicleRepository myRepo;
-	
-	@Test
+	 
+	@Test 
 	public void retrieveByIdTest() {
-		garageAppVehicle vehicle1 = new garageAppVehicle("CAR", "big", "blue");
+		GarageAppVehicle vehicle1 = new GarageAppVehicle("CAR", "big", "blue");
 		entityManager.persist(vehicle1);
 		entityManager.flush();
 		assertTrue(myRepo.findById(vehicle1.getId()).isPresent());
@@ -39,13 +40,14 @@ public class TestRepository {
 	
 	@Test
 	public void retrieveByTypeTest() {
-		garageAppVehicle car1 = new garageAppVehicle("CAR","big","pink");
+		GarageAppVehicle car1 = new GarageAppVehicle("CAR","big","pink");
 		entityManager.persist(car1);
 		entityManager.flush();
-		List<garageAppVehicle> vehicles = myRepo.findByType(VehicleType.CAR);
-		for(garageAppVehicle vehicle :vehicles) {
+		List<GarageAppVehicle> vehicles = myRepo.findByType(VehicleType.CAR);
+		for(GarageAppVehicle vehicle :vehicles) { 
 		assertEquals("not the right type", vehicle.getType(), "CAR");
 		}
 			
 	}
-}
+} 
+	
